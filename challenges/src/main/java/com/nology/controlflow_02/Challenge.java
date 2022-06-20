@@ -20,7 +20,7 @@ public class Challenge {
      * @return returns a string which is the concatenation of the 2 parameters
      */
     public String getFullName(String firstName, String lastName) {
-        return "";
+        return firstName + " " + lastName;
     }
 
     /***
@@ -31,7 +31,11 @@ public class Challenge {
      * @return returns a boolean based on whether the number is between 0 and the range limit
      */
     public boolean isWithinRange(int number, int rangeLimit) {
-        return false;
+        if (number >= 0 && number <= rangeLimit) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -50,7 +54,20 @@ public class Challenge {
      * @return returns the result of the equation
      */
     public int stringCalculator(int numberOne, int numberTwo, String operator) {
-        return -1;
+
+        if (numberOne > 0 || numberTwo > 0 || operator == "") {
+            return -1;
+        } else if (operator == "+") {
+            return numberOne + numberTwo;
+        } else if (operator == "-") {
+            return numberOne - numberTwo;
+        }else if (operator == "*") {
+            return numberOne * numberTwo;
+        }else if (operator == "/") {
+            return numberOne / numberTwo;
+        }  else {
+            return -1;
+        }
     }
 
 
@@ -70,7 +87,16 @@ public class Challenge {
      * @return If we need to wake up or not based on the conditions above.
      */
     public boolean shouldWakeUp(boolean barking, int hourOfDay) {
-        return false;
+        if (hourOfDay > 0 && hourOfDay < 25){
+            if (barking == true && (hourOfDay < 8 || hourOfDay > 22) ){
+                return true;
+            } else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
     }
 
     /***
@@ -83,7 +109,17 @@ public class Challenge {
      * character in the string: a"
      */
     public String getMiddleCharacter(String word) {
-        return "";
+        if (word.strip() == "" || word.strip() == null || word.contains(" ") ) {
+            return "Invalid Input";
+        }else {
+            if (word.strip().length() % 2 == 0) {
+                int position = (word.strip().length())/2;
+                return String.format("%s%s",word.charAt(position-1), word.charAt(position));
+            } else {
+                int position = (word.strip().length()-1)/2;
+                return String.format("%s",word.charAt(position));
+            }
+        }
     }
 
 
@@ -99,7 +135,30 @@ public class Challenge {
      * @return returns a string in the format above if the input is valid, or "Invalid value"
      */
     public String printMegaBytesAndKiloBytes(int kiloBytes) {
-        return "";
+        int count = 0;
+        int countLeft = kiloBytes;
+
+        if (kiloBytes > 0) {
+            if (kiloBytes >= 1024) {
+                boolean isMoreThanOneMB = true;
+
+                while (isMoreThanOneMB) {
+                    count += 1;
+                    countLeft -= 1024;
+
+                    if (countLeft <= 1024) {
+                        isMoreThanOneMB = false;
+                    }
+                }
+                return String.format("%s KB = %s MB and %s KB", kiloBytes, count, countLeft);
+
+            } else {
+                return String.format("%s KB = %s MB and %s KB", kiloBytes, 0, kiloBytes);
+            }
+
+        } else {
+            return "Invalid Value";
+        }
     }
 
     // -------------- ADVANCED --------------
@@ -121,6 +180,19 @@ public class Challenge {
      * @return returns the total amount after x number of years (including the initial investment)
      */
     public String calculateReturn(int initialInvestment, int years, double rateOfInterest) {
-        return "";
+        if (initialInvestment <= 0) {
+            return "Invalid investment";
+        } else if (years <= 0) {
+            return "Invalid years";
+        } else if (rateOfInterest < 0 || rateOfInterest >= 1) {
+            return "Invalid rate of interest";
+        } else {
+            double value = initialInvestment;
+
+            for (int i = 0; i < years; i++) {
+                value += value * rateOfInterest;
+            }
+            return String.format("You now have %s", Math.round(value));
+        }
     }
 }
