@@ -36,7 +36,17 @@ public class Challenge {
      * @return count of all the Crosses (1's) in the given game
      */
     public int calculateCrosses(int[][] game) {
-        return -1;
+        int count = 0;
+
+        for (int i = 0; i < game.length; i++) {
+            for (int j = 0; j < game[i].length; j++) {
+                if (game[i][j] == 1) {
+                    count += 1;
+                }
+            }
+        }
+
+        return count;
     }
 
     /**
@@ -46,7 +56,17 @@ public class Challenge {
      * @return count of the noughts (0's) and crosses (1's) in the given game
      */
     public int calculateMoves(int[][] game) {
-        return -1;
+        int count = 0;
+
+        for (int i = 0; i < game.length; i++) {
+            for (int j = 0; j < game[i].length; j++) {
+                if (game[i][j] == 1 || game[i][j] == 0) {
+                    count += 1;
+                }
+            }
+        }
+
+        return count;
     }
 
     /**
@@ -56,7 +76,17 @@ public class Challenge {
      * @return float the percentage of used squares
      */
     public float calculateMovesPercentage(int[][] game) {
-        return -1;
+        float count = 0;
+
+        for (int i = 0; i < game.length; i++) {
+            for (int j = 0; j < game[i].length; j++) {
+                if (game[i][j] != -1) {
+                    count += 1;
+                }
+            }
+        }
+
+        return (count / 9 * 100);
     }
 
     // -------------- INTERMEDIATE --------------
@@ -72,6 +102,13 @@ public class Challenge {
      * @return If the given player has horizontally won or not
      */
     public boolean hasPlayerWonHorizontal(int[][] game, int player) {
+        for (int i = 0; i < game.length; i++) {
+            if (game[i][0] == player && game[i][1] == player && game[i][2] == player) {
+                return true;
+            }
+
+        }
+
         return false;
     }
 
@@ -85,6 +122,13 @@ public class Challenge {
      * @return If the player has vertically won or not
      */
     public boolean hasPlayerWonVertical(int[][] game, int player) {
+        for (int i = 0; i < 1; i++) {
+            for (int j = 0; j < game[i].length; j++) {
+                if (game[i][j] == player && game[i+1][j] == player && game[i+2][j] == player) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -96,6 +140,15 @@ public class Challenge {
      * @return If the player has diagonally won or not
      */
     public boolean hasPlayerWonDiagonally(int[][] game, int player) {
+        for (int i = 0; i < 1; i++) {
+            for (int j = 0; j < 1; j++) {
+                if (game[i][j] == player && game[i+1][j+1] == player && game[i+2][j+2] == player) {
+                    return true;
+                } else if (game[i+2][j] == player && game[i+1][j+1] == player && game[i][j+2] == player) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -109,7 +162,11 @@ public class Challenge {
      */
     public int getWinningPlayer(int[][] game) {
         // ..... Who can solve this? ;)
+        if (hasPlayerWonDiagonally(game,1) || hasPlayerWonHorizontal(game, 1) || hasPlayerWonVertical(game, 1)){
+            return 1;
+        } else if (hasPlayerWonDiagonally(game,0) || hasPlayerWonHorizontal(game, 0) || hasPlayerWonVertical(game, 0)){
+            return 0;
+        }
         return -1;
     }
-
 }

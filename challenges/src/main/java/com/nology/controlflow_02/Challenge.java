@@ -55,7 +55,7 @@ public class Challenge {
      */
     public int stringCalculator(int numberOne, int numberTwo, String operator) {
 
-        if (numberOne > 0 || numberTwo > 0 || operator == "") {
+        if (numberOne < 0 || numberTwo < 0 || operator == "") {
             return -1;
         } else if (operator == "+") {
             return numberOne + numberTwo;

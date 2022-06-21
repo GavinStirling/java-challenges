@@ -13,7 +13,7 @@ public class Challenge {
     // -------------- FOUNDATION --------------
 
     /***
-     * Get the first and last items in an given string array.
+     * Get the first and last items in a given string array.
      *
      * If a the given array's length is 0 return an empty string array.
      *
@@ -21,7 +21,16 @@ public class Challenge {
      * @return a new array containing the first and last items in the given array e.g. ["Ollie", "Bex"]
      */
     public String[] getFirstAndLast(String[] namesArr) {
-        return new String[0];
+
+        if (namesArr.length == 0) {
+            String[] resultsArr = new String[0];
+            return resultsArr;
+        }else {
+            String[] resultsArr = new String[2];
+            resultsArr[0] = namesArr[0];
+            resultsArr[1] = namesArr[namesArr.length - 1];
+            return resultsArr;
+        }
     }
 
     /***
@@ -31,7 +40,14 @@ public class Challenge {
      * @return an amount e.g. 104
      */
     public int totalAges(int[] agesArr) {
-        return -1;
+        int count = 0;
+//        for (int i = 0; i < agesArr.length; i++) {
+//            count += agesArr[i];
+//        }
+        for (int age : agesArr) {
+            count += age;
+        }
+        return count;
     }
 
     /***
@@ -41,7 +57,18 @@ public class Challenge {
      * @return Amount of odd numbers e.g. 3
      */
     public int getAmountOfOddNumbers(int[] numbersArr) {
-        return -1;
+        int count = 0;
+//        for (int i = 0; i < numbersArr.length; i++) {
+//            if (numbersArr[i] % 2 == 1) {
+//                count += 1;
+//            }
+//        }
+        for  (int number : numbersArr) {
+            if (number % 2 == 1) {
+                count += 1;
+            }
+        }
+        return count;
     }
 
     // -------------- INTERMEDIATE --------------
@@ -57,7 +84,16 @@ public class Challenge {
      * @return a new array of all numbers between and including the min and max number. e.g. [3, 4, 5, 6]
      */
     public int[] getRange(int min, int max) {
-        return new int[] {};
+        if (max < min) {
+            return new int[] {};
+        } else {
+            int length = max - min + 1;
+            int[] resultsArr = new int[length];
+            for (int i = 0; i < length; i++) {
+                resultsArr[i] = min + i;
+            }
+            return resultsArr;
+        }
     }
 
     /**
@@ -66,7 +102,15 @@ public class Challenge {
      * @return a string with the last name, followed by the first name e.g. "Evans Andy"
      */
     public String swapNames(String fullName) {
-        return "";
+        String[] splitName = fullName.split(" ");
+        String[] resultsArr = new String[splitName.length];
+
+        for (int i = 0; i < splitName.length; i++) {
+            resultsArr[i] = splitName[splitName.length - (i + 1)];
+
+        }
+
+        return String.join(" ", resultsArr);
     }
 
     /***
@@ -80,7 +124,15 @@ public class Challenge {
      * @return true or false depending on whether the newScore is the highest value in the array
      */
     public boolean isHighestScore(int[] scoresArr, int newScore) {
-        return false;
+        boolean isHighest = true;
+        for (int score : scoresArr) {
+            if (newScore > score) {
+                isHighest = true;
+            } else {
+                isHighest = false;
+            }
+        }
+        return isHighest;
     }
 
     // -------------- ADVANCED --------------
@@ -103,7 +155,16 @@ public class Challenge {
      * @return The sorted array of numbers e.g. [1, 2, 4, 5, 8]
      */
     public int[] sort(int[] numbersArr) {
-        return new int[] {};
+        for (int i = 0; i < numbersArr.length-1; i++) {
+            for (int j = i+1; j < numbersArr.length; j++) {
+                if (numbersArr[i] > numbersArr[j]) {
+                    int temp = numbersArr[i];
+                    numbersArr[i] = numbersArr[j];
+                    numbersArr[j] = temp;
+                }
+            }
+        }
+        return numbersArr;
     }
 
 }
